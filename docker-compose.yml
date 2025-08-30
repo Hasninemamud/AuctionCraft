@@ -1,0 +1,56 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-auctioncraft}
+      POSTGRES_USER: ${POSTGRES_USER:-auctioncraft}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U ${POSTGRES_USER:-auctioncraft}"]
+      interval: 10s
+      retries: 5
+
+  web:
+    build: .
+    command: /code/docker-entrypoint.sh
+    volumes:
+      - .:/code
+      - static_volume:/code/staticfiles
+      - media_volume:/code/media
+    ports:
+      - "8000:8000"
+    environment:
+      # Django settings
+      DJANGO_SECRET_KEY: "${DJANGO_SECRET_KEY}"
+      DEBUG: "${DEBUG:-0}"
+      ALLOWED_HOSTS: "${ALLOWED_HOSTS:-localhost,127.0.0.1}"
+      # Database
+      DATABASE_ENGINE: django.db.backends.postgresql
+      DATABASE_NAME: ${POSTGRES_DB:-auctioncraft}
+      DATABASE_USER: ${POSTGRES_USER:-auctioncraft}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      DATABASE_HOST: db
+      DATABASE_PORT: ${DATABASE_PORT:-5432}
+      # Stripe
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      # Email (dev uses console backend)
+      EMAIL_BACKEND: ${EMAIL_BACKEND:-django.core.mail.backends.console.EmailBackend}
+      DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-no-reply@auctioncraft.local}
+      # Entrypoint behavior
+      DJANGO_COLLECTSTATIC: "0"
+      # Optional superuser creation:
+      DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL:-}
+      DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD:-}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
