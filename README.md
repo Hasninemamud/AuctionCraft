@@ -1,6 +1,6 @@
 <div align="center">
   
-# AuctionCraft - Django REST API (Skeleton)
+# AuctionCraft - Django REST API 
   
 </div>
 
