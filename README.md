@@ -3,7 +3,7 @@
 [![Django](https://img.shields.io/badge/Django-4.2+-green.svg)](https://djangoproject.com/)
 [![DRF](https://img.shields.io/badge/DRF-3.14+-blue.svg)](https://www.django-rest-framework.org/)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 
 A robust Django REST Framework backend for an auction platform with JWT authentication, Stripe payments, and real-time bidding capabilities.
 
@@ -368,25 +368,5 @@ auctioncraft/
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
-
-- **Documentation**: Check the inline code comments and docstrings
-- **Issues**: Report bugs on the [GitHub Issues](https://github.com/yourusername/auctioncraft-api/issues) page
-- **Email**: For additional support, contact support@auctioncraft.com
-
-## 🔄 Changelog
-
-### v1.0.0 (Current)
-- Initial release with core auction functionality
-- JWT authentication with OTP verification
-- Stripe payment integration
-- RESTful API design
-- Basic notification system
-
----
-
-**Made with ❤️ for the auction community**
