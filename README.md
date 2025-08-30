@@ -1,12 +1,13 @@
 <div align="center">
-
 # AuctionCraft - Django REST API (Skeleton)
-
+</div>
 This is a ready-to-run Django REST Framework backend skeleton for AuctionCraft.  
 It exposes API endpoints for products, bids, categories, user registration & JWT auth, and Stripe payment intent creation + webhook handling.
 
-</div>
 
+
+
+````markdown
 ## 📌 Use Case Diagram
 
 ```plantuml
@@ -37,7 +38,10 @@ rectangle AuctionCraft {
   (Pay via Stripe) --> Stripe
 }
 @enduml
-```
+````
+
+````
+````
 
 
 ## Features implemented
